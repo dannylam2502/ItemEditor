@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class ItemEditor : MonoBehaviour
 {
-    public InputField ipdOldPrice;
-    public InputField ipdNewPrice;
-
     public CanvasScaler canvasScaler;
     public Canvas canvasPanel;
     public RectTransform panelImgEdit;
@@ -19,6 +16,10 @@ public class ItemEditor : MonoBehaviour
     public TextMeshProUGUI txtOldPrice;
     public TextMeshProUGUI txtNewPrice;
     public Image sprItem;
+    public Text txtItemName;
+    public Text txtItemDescription;
+    public Text txtDirection;
+    public TextMeshProUGUI txtDate;
 
     public ItemProductHandler curItem;
     // Start is called before the first frame update
@@ -35,22 +36,21 @@ public class ItemEditor : MonoBehaviour
     {
         if (curItem != null)
         {
-            ipdOldPrice.text = curItem.oldPrice.ToString();
-            ipdNewPrice.text = curItem.newPrice.ToString();
+            txtOldPrice.text = curItem.oldPrice.ToString() + "k";
+            txtNewPrice.text = curItem.newPrice.ToString() + "k";
+            txtItemName.text = curItem.inpName.text;
+            txtItemDescription.text = curItem.inpDes.text;
+            txtDirection.text = curItem.inpDirection.text;
+            txtDate.text = curItem.inpDate.text;
         }
-        txtOldPrice.text = ipdOldPrice.text + "k";
-        txtNewPrice.text = ipdNewPrice.text + "k";
     }
 
     public void Load(ItemProductHandler handler)
     {
         sprItem.sprite = handler.sprite;
         curItem = handler;
-        if (handler)
-        {
-            ipdOldPrice.text = handler.oldPrice.ToString();
-            ipdNewPrice.text = handler.newPrice.ToString();
-        }
+        txtItemName.text = handler.inpName.text;
+        txtItemDescription.text = handler.inpDes.text;
     }
 
     public void OnClickSave()

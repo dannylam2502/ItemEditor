@@ -7,6 +7,10 @@ public class ItemProductHandler : MonoBehaviour
 {
     public InputField inpOldPrice;
     public InputField inpNewPrice;
+    public InputField inpName;
+    public InputField inpDes;
+    public InputField inpDate;
+    public InputField inpDirection;
     public int oldPrice;
     public int newPrice;
     public string itemName;
@@ -44,6 +48,7 @@ public class ItemProductHandler : MonoBehaviour
         itemName = name;
         this.path = path;
         this.sprite = sprite;
+        inpName.text = name;
     }
 
     public void SetCallback(OnClickItemCallback callback)
