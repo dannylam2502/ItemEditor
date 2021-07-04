@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -97,8 +98,37 @@ public class ItemEditor : MonoBehaviour
         var scaleY = rect.height / canvasScaler.referenceResolution.y;
         ScreenshotHandler.TakeScreenshot_Static((int)canvasScaler.referenceResolution.x, (int)canvasScaler.referenceResolution.y, scaleX, scaleY,
             true, path);
-
     }
+
+    //public void OnClickBtnSaveProject()
+    //{
+    //    var itemLoader = FindObjectOfType<ItemLoader>();
+    //    if (itemLoader)
+    //    {
+    //        var extensionList = new[] {
+    //new ExtensionFilter("PNEG", "png"),
+    //new ExtensionFilter("Text", "txt"),
+    //        };
+    //        var newPath = StandaloneFileBrowser.OpenFolderPanel("Choose Folder To Save", "png", false);
+    //        ItemSavedData dataObject = new ItemSavedData();
+    //        dataObject.data = new ItemSaveDetailData[itemLoader.contentLayout.childCount];
+    //        for (int i = 0; i < itemLoader.transform.childCount; i++)
+    //        {
+    //            var item = itemLoader.transform.GetChild(i);
+    //            var component = item.GetComponent<ItemProductHandler>();
+    //            if (component)
+    //            {
+    //                ItemSaveDetailData detail = new ItemSaveDetailData();
+    //                detail.Set(component);
+    //                dataObject.data[i] = detail;
+    //            }
+    //        }
+    //        BinaryFormatter bf = new BinaryFormatter();
+    //        FileStream file = File.Create(newPath[0]);
+    //        bf.Serialize(file, dataObject);
+    //        file.Close();
+    //    }
+    //}
 
     //    public void AnotherFunction()
     //    {

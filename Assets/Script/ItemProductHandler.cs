@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,22 @@ public class ItemProductHandler : MonoBehaviour
         }
     }
 
+    public void LoadData(ItemSaveDetailData info)
+    {
+        txtName.text = info.itemName;
+        itemName = info.itemName;
+        this.path = info.imagePath;
+        this.sprite = LoadPNG(info.image);
+        inpName.text = info.itemName;
+        inpDes.text = info.description;
+        inpDate.text = info.date;
+        inpDirection.text = info.direction;
+        oldPrice = info.oldPrice;
+        newPrice = info.newPrice;
+        inpOldPrice.text = oldPrice.ToString();
+        inpNewPrice.text = newPrice.ToString();
+    }
+
     public void SetData(string name, string path, Sprite sprite)
     {
         txtName.text = name;
@@ -59,5 +76,34 @@ public class ItemProductHandler : MonoBehaviour
     public void OnClicked()
     {
         this.callback?.Invoke(this);
+    }
+
+    public static Sprite LoadPNG(string filePath)
+    {
+        Texture2D tex = null;
+        byte[] fileData;
+        Sprite result = null;
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+            tex = new Texture2D(2, 2);
+            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+            // to sprite
+            Rect rec = new Rect(0, 0, tex.width, tex.height);
+            result = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+        }
+        return result;
+    }
+
+    public static Sprite LoadPNG(byte[] imageData)
+    {
+        Texture2D tex = null;
+        Sprite result = null;
+        tex = new Texture2D(2, 2);
+        tex.LoadImage(imageData); //..this will auto-resize the texture dimensions.
+        // to sprite
+        Rect rec = new Rect(0, 0, tex.width, tex.height);
+        result = Sprite.Create(tex, rec, new Vector2(0.5f, 0.5f), 100);
+        return result;
     }
 }

@@ -57,9 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\CanvasScreenShot.cs" />
+    <Compile Include="Assets\Script\ExtensionMethod.cs" />
     <Compile Include="Assets\Script\ItemEditor.cs" />
     <Compile Include="Assets\Script\ItemLoader.cs" />
     <Compile Include="Assets\Script\ItemProductHandler.cs" />
+    <Compile Include="Assets\Script\ItemSavedData.cs" />
     <Compile Include="Assets\Script\SR_RenderCamera.cs" />
     <Compile Include="Assets\Script\ScreenCaptureIntoRenderTexture.cs" />
     <Compile Include="Assets\Script\ScreenshotHandler.cs" />
