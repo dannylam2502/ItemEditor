@@ -2,16 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ItemLoader : MonoBehaviour
 {
     public ItemProductHandler prefab;
     public RectTransform contentLayout;
     public ItemEditor itemEditor;
+    public ScrollRect scrollRectController;
 
     public const string SAVE_FILE_NAME = "VinacineItemData.dat";
 
@@ -22,7 +25,7 @@ public class ItemLoader : MonoBehaviour
         var images = Resources.LoadAll<Sprite>(path);
         foreach (var item in images)
         {
-            var instance = Instantiate(prefab, contentLayout, false);
+            var instance = Instantiate(prefab.gameObject, contentLayout, false);
             var component = instance.GetComponent<ItemProductHandler>();
             if (component)
             {
@@ -128,7 +131,7 @@ public class ItemLoader : MonoBehaviour
         }
         foreach (var item in dataObject.data)
         {
-            var instance = Instantiate(prefab, contentLayout, false);
+            var instance = Instantiate(prefab.gameObject, contentLayout, false);
             var component = instance.GetComponent<ItemProductHandler>();
             if (component)
             {
@@ -145,6 +148,35 @@ public class ItemLoader : MonoBehaviour
             {
                 OnClickItem(component);
                 break;
+            }
+        }
+    }
+
+    public void OnClickImportImage()
+    {
+        var extensionList = new[] {
+        new ExtensionFilter("PNEG", "png"),
+        new ExtensionFilter("JPEG", "jpg")
+            };
+        var filePaths = StandaloneFileBrowser.OpenFilePanel("Choose Image", "", extensionList, true);
+        if (filePaths.Length > 0)
+        {
+            foreach (var filePath in filePaths)
+            {
+                Sprite spr = ItemProductHandler.LoadSprite(filePath);
+                if (spr)
+                {
+                    var instance = Instantiate(prefab.gameObject, contentLayout, false);
+                    instance.transform.SetAsFirstSibling();
+                    var component = instance.GetComponent<ItemProductHandler>();
+                    if (component)
+                    {
+                        var substrings = filePath.Split('\\');
+                        component.SetData(substrings.Last(), filePath, spr);
+                        component.SetCallback(OnClickItem);
+                        OnClickItem(component);
+                    }
+                }
             }
         }
     }

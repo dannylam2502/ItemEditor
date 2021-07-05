@@ -113,7 +113,7 @@ public class ItemProductHandler : MonoBehaviour
         }
     }
 
-    public static Sprite LoadPNG(string filePath)
+    public static Sprite LoadSprite(string filePath)
     {
         Texture2D tex = null;
         byte[] fileData;
