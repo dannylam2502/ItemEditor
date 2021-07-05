@@ -945,7 +945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -251.99994, y: -52}
+  m_AnchoredPosition: {x: -252, y: -52}
   m_SizeDelta: {x: -503.50598, y: -103.31189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372293306
@@ -3564,7 +3564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1774926175
 Transform:
   m_ObjectHideFlags: 0
@@ -3779,7 +3779,6 @@ GameObject:
   - component: {fileID: 1819253447}
   - component: {fileID: 1819253446}
   - component: {fileID: 1819253450}
-  - component: {fileID: 1819253451}
   m_Layer: 5
   m_Name: CanvasItemPreview
   m_TagString: Untagged
@@ -3836,7 +3835,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1483818618}
+  m_Camera: {fileID: 1774926177}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3902,17 +3901,3 @@ MonoBehaviour:
   defaultDescriptionPos: {x: 0, y: 0}
   defaultDirectionPos: {x: 0, y: 0}
   defaultDatePos: {x: 0, y: 0}
---- !u!114 &1819253451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819253445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed4385ca48470d458e8748ae777503a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scaleX: 0
-  _scaleY: 0
