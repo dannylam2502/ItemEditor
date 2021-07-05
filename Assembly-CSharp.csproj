@@ -66,6 +66,7 @@
     <Compile Include="Assets\Script\ScreenCaptureIntoRenderTexture.cs" />
     <Compile Include="Assets\Script\ScreenshotHandler.cs" />
     <Compile Include="Assets\Script\Test.cs" />
+    <Compile Include="Assets\Script\UIElementDragger.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\BasicSample.cs" />
     <Compile Include="Assets\StandaloneFileBrowser\Sample\CanvasSampleOpenFileImage.cs" />

@@ -21,11 +21,33 @@ public class ItemEditor : MonoBehaviour
     public Text txtItemDescription;
     public Text txtDirection;
     public TextMeshProUGUI txtDate;
+    [Header("ITEM POSITION")]
+    public RectTransform rectImage;
+    public RectTransform rectPriceTag;
+    public RectTransform rectItemName;
+    public RectTransform rectDescription;
+    public RectTransform rectDirection;
+    public RectTransform rectDate;
 
     public ItemProductHandler curItem;
+
+    // Default
+    public Vector2 defaultImagePos;
+    public Vector2 defaultPriceTagPos;
+    public Vector2 defaultItemNamePos;
+    public Vector2 defaultDescriptionPos;
+    public Vector2 defaultDirectionPos;
+    public Vector2 defaultDatePos;
+
     // Start is called before the first frame update
     void Start()
     {
+        defaultImagePos = rectImage.anchoredPosition;
+        defaultPriceTagPos = rectPriceTag.anchoredPosition;
+        defaultItemNamePos = rectItemName.anchoredPosition;
+        defaultDescriptionPos = rectDescription.anchoredPosition;
+        defaultDirectionPos = rectDirection.anchoredPosition;
+        defaultDatePos = rectDate.anchoredPosition;
     }
 
     public void OnEnable()
@@ -43,15 +65,60 @@ public class ItemEditor : MonoBehaviour
             txtItemDescription.text = curItem.inpDes.text;
             txtDirection.text = curItem.inpDirection.text;
             txtDate.text = curItem.inpDate.text;
+
+            curItem.posImage = rectImage.anchoredPosition;
+            curItem.posDate = rectDate.anchoredPosition;
+            curItem.posDescription = rectDescription.anchoredPosition;
+            curItem.posDirection = rectDirection.anchoredPosition;
+            curItem.posItemName = rectItemName.anchoredPosition;
+            curItem.posPriceTag = rectPriceTag.anchoredPosition;
         }
     }
 
     public void Load(ItemProductHandler handler)
     {
-        sprItem.sprite = handler.sprite;
+        if (curItem)
+        {
+            curItem.OnDeselected();
+        }
         curItem = handler;
-        txtItemName.text = handler.inpName.text;
-        txtItemDescription.text = handler.inpDes.text;
+        if (curItem)
+        {
+            curItem.OnSelected();
+            sprItem.sprite = handler.sprite;
+            txtItemName.text = handler.inpName.text;
+            txtItemDescription.text = handler.inpDes.text;
+
+            if (curItem.posImage != Vector2.zero)
+            {
+                rectImage.anchoredPosition = curItem.posImage;
+                rectDate.anchoredPosition = curItem.posDate;
+                rectDescription.anchoredPosition = curItem.posDescription;
+                rectDirection.anchoredPosition = curItem.posDirection;
+                rectItemName.anchoredPosition = curItem.posItemName;
+                rectPriceTag.anchoredPosition = curItem.posPriceTag;
+            }
+        }
+    }
+
+    public void ResetItemLayout(ItemProductHandler item)
+    {
+        if (curItem == item)
+        {
+            rectImage.anchoredPosition = defaultImagePos;
+            rectDate.anchoredPosition = defaultDatePos;
+            rectDescription.anchoredPosition = defaultDescriptionPos;
+            rectDirection.anchoredPosition = defaultDirectionPos;
+            rectItemName.anchoredPosition = defaultItemNamePos;
+            rectPriceTag.anchoredPosition = defaultPriceTagPos;
+        }
+
+        item.posImage = rectImage.anchoredPosition;
+        item.posDate = rectDate.anchoredPosition;
+        item.posDescription = rectDescription.anchoredPosition;
+        item.posDirection = rectDirection.anchoredPosition;
+        item.posItemName = rectItemName.anchoredPosition;
+        item.posPriceTag = rectPriceTag.anchoredPosition;
     }
 
     public void OnClickSave()

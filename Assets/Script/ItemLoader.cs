@@ -45,6 +45,14 @@ public class ItemLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftCommand)
+            || Input.GetKey(KeyCode.RightCommand))
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                OnClickBtnSaveProject();
+            }
+        }
     }
 
     public void OnClickItem(ItemProductHandler itemProductHandler)
@@ -58,10 +66,9 @@ public class ItemLoader : MonoBehaviour
         if (itemLoader)
         {
             var extensionList = new[] {
-    new ExtensionFilter("PNEG", "png"),
-    new ExtensionFilter("Text", "txt"),
+                new ExtensionFilter("Vinacine Data File", "dat"),
             };
-            var newPath = StandaloneFileBrowser.OpenFolderPanel("Choose Folder To Save", "png", false);
+            var newPath = StandaloneFileBrowser.SaveFilePanel("Choose Folder To Save", "", SAVE_FILE_NAME, extensionList);
             if (newPath.Length > 0)
             {
                 ItemSavedData dataObject = new ItemSavedData();
@@ -80,7 +87,7 @@ public class ItemLoader : MonoBehaviour
                     }
                 }
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Create(newPath[0] + "/" + SAVE_FILE_NAME);
+                FileStream file = File.Create(newPath);
                 bf.Serialize(file, dataObject);
                 file.Close();
             }

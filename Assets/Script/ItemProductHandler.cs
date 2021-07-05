@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class ItemProductHandler : MonoBehaviour
 {
+    public Image background;
     public InputField inpOldPrice;
     public InputField inpNewPrice;
     public InputField inpName;
@@ -20,14 +22,21 @@ public class ItemProductHandler : MonoBehaviour
     public Text txtName;
     public Sprite sprite;
 
+    // UI position
+    public Vector2 posImage;
+    public Vector2 posItemName;
+    public Vector2 posPriceTag;
+    public Vector2 posDescription;
+    public Vector2 posDate;
+    public Vector2 posDirection;
 
     public delegate void OnClickItemCallback(ItemProductHandler handler);
 
     public OnClickItemCallback callback;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -57,6 +66,13 @@ public class ItemProductHandler : MonoBehaviour
         newPrice = info.newPrice;
         inpOldPrice.text = oldPrice.ToString();
         inpNewPrice.text = newPrice.ToString();
+
+        posDate = info.posDate;
+        posDescription = info.posDescription;
+        posDirection = info.posDirection;
+        posImage = info.posImage;
+        posItemName = info.posItemName;
+        posPriceTag = info.posPriceTag;
     }
 
     public void SetData(string name, string path, Sprite sprite)
@@ -76,6 +92,25 @@ public class ItemProductHandler : MonoBehaviour
     public void OnClicked()
     {
         this.callback?.Invoke(this);
+    }
+
+    public void OnSelected()
+    {
+        background.color = Color.yellow;
+    }
+
+    public void OnDeselected()
+    {
+        background.color = Color.white;
+    }
+
+    public void OnClickBtnReset()
+    {
+        var itemEditor = FindObjectOfType<ItemEditor>();
+        if (itemEditor)
+        {
+            itemEditor.ResetItemLayout(this);
+        }
     }
 
     public static Sprite LoadPNG(string filePath)

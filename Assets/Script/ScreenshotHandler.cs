@@ -57,7 +57,6 @@ public class ScreenshotHandler : MonoBehaviour
         // Save file with filter
         var extensionList = new[] {
     new ExtensionFilter("PNEG", "png"),
-    new ExtensionFilter("Text", "txt"),
 };
         if (isAuto)
         {
@@ -66,7 +65,10 @@ public class ScreenshotHandler : MonoBehaviour
         else
         {
             var newPath = StandaloneFileBrowser.SaveFilePanel("Save File", "", "MySaveFile", extensionList);
-            File.WriteAllBytes(newPath, pngArray);
+            if (newPath.Length > 0)
+            {
+                File.WriteAllBytes(newPath, pngArray);
+            }
         }
     }
 
